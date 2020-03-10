@@ -54,8 +54,32 @@ def ONP(list):
                 temp = ""
             else:
                 temp += char
-    print(output)
+    return output
 
 
+def INF(input_data):
+    output = []
+    temp = []
+    symbols = ['^', '*', '/', '+', '-', '(', '=']
+    for item in input_data:
+        for char in item:
+            if char not in symbols:
+                temp.insert(0, char)
+            else:
+                r = temp.pop(0)
+                l = temp.pop(0)
 
-ONP(read("Zad1.2(INF).txt"))
+                if char in ["+", "-"]:
+                    if r[0] == "(" and r[-1] == ")":
+                        r = r[1:-1]
+
+                    if l[0] == "(" and l[-1] == ")":
+                        l = l[1:-1]
+
+                temp.insert(0, "(" + l + char + r + ")")
+        output.append(temp[0][1:-1])
+    return output
+
+
+print(ONP(read("Zad1.2(INF).txt")))
+print(INF(read("Zad1.2(ONP).txt")))

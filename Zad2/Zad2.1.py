@@ -10,6 +10,9 @@ class Queue:
         if len(self.Queue) == 0: return True
         else: return False
 
+    def Size(self):
+        return len(self.Queue)
+
     def Front(self):
         return self.Queue[0]
 
@@ -17,6 +20,12 @@ class Queue:
         self.Queue.append(end)
 
     def Pop(self):
-        self.Queue.pop(len(self.Queue) - 1)
+        if self.isEmpty(): return print("Kolejka jest pusta")
+        else : self.Queue.pop(0)
 
 
+q = Queue()
+q.Push(1)
+q.Push(2)
+q.Push(3)
+print(q)

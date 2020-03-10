@@ -17,6 +17,4 @@ class Queue:
         self.Queue.append(end)
 
     def Pop(self):
-        self.Queue.pop(len(self.Queue) - 1)
-
-
+        self.Queue.pop(0)
