@@ -13,13 +13,13 @@ class Queue:
     def Size(self):
         return len(self.Queue)
 
-    def Front(self):
+    def Peek(self):
         return self.Queue[0]
 
-    def Push(self, end):
+    def Enqueue(self, end):
         self.Queue.append(end)
 
-    def Pop(self):
+    def Dequeue(self):
         if self.isEmpty(): return print("Kolejka jest pusta")
         else : self.Queue.pop(0)
 
