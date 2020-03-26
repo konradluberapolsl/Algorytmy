@@ -25,7 +25,9 @@ class Queue:
 
     def dequeue(self):
         if self.isempty(): return None
-        else : self.Queue.pop(0)
+        else :
+            print("Element: "+ str(self.Queue[0]) + " opuscił kolejke")
+            self.Queue.pop(0)
 
     def find(self, element):
         #index(elemnet) - zwraca tylko pierwszy napotkany
@@ -44,6 +46,7 @@ q.enqueue(5)
 q.enqueue(5)
 q.enqueue("qweqeq")
 print(q)
+q.dequeue()
 print(q.size())
 print(q.find(5))
 print(q.find(6))
