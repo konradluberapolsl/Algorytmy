@@ -81,5 +81,5 @@ def INF(input_data):
     return output
 
 
-print(ONP(read("Zad1.2(INF).txt")))
-print(INF(read("Zad1.2(ONP).txt")))
+print(ONP(read("Zad1/Zad1.2(INF).txt")))
+print(INF(read("Zad1/Zad1.2(ONP).txt")))

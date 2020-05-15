@@ -1,3 +1,4 @@
+import os
 def read(name):
     file = open(name, "r")
     numbers = file.read().splitlines()
@@ -11,7 +12,4 @@ def find_max(numbers):
         if float(numbers[i])>max: max = float(numbers[i])
     print(max)
 
-
-
-
-find_max(read("Zad1.1.txt"))
+find_max(read("Zad1/Zad1.1.txt"))
