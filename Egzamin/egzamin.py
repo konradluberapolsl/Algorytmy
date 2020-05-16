@@ -7,7 +7,7 @@ def read_to_string(path):
     with open(path, 'r', encoding="utf-8") as file:
         text = file.read()
     text = text.lower()
-    # print(text)
+    #print(text)
     file.close()
     return text
 
@@ -20,7 +20,8 @@ def read_to_dict(path):
             for word in line.split():
                 tmp = word.strip(symbols)
                 tmp = tmp.lower()
-                t = ' ' + tmp + ' '
+                #t = ' ' + tmp + ' '
+                t = tmp
                 # TYMCZASOWE ROZWIĄZANIE!
                 if t not in words and tmp != "":
                     words[t] = False
@@ -32,6 +33,7 @@ def read_to_dict(path):
 
 def bm(text, words):
     n = len(text)
+    symbols = [' ', '.', ',', '!', '?', '-', '(', ')', '#', '*', '']
     for w in words:
         m = len(w)
         i = m - 1
@@ -39,9 +41,16 @@ def bm(text, words):
         while True:
             if w[j] == text[i]:
                 if j == 0:
-                    words[w] = True
-                    # print("Matched word: '" + w + "' on position: " + str(i))
-                    break
+                    if i == 0 or text[i-1] in symbols and text[i+len(w)] in symbols:
+                        words[w] = True
+                        # print("Matched word: '" + w + "' on position: " + str(i))
+                        # if i == 0:  print("Before: None")
+                        # else: print("Before: " + text[i-1])
+                        # print("After: " + text[i + len(w)])
+                        break
+                    else:
+                        i = i + m - min(j, 1 + w.rfind(text[i]))
+                        j = m - 1
                 else:
                     i -= 1
                     j -= 1
@@ -64,11 +73,11 @@ def results(words_1, words_2):
             i += 1
     c = int(len(words_2)) - j
 
-    # print("Ilość słów w pliku 1. (bez powtórzeń): " + str(len(words_1)))
-    # print("Ilość słów w pliku 2. (bez powtórzeń): " + str(len(words_2)))
-    # print("Ilość słów unikalne dla pliku 1: " + str(i))
-    # print("Ilość słów unikalne dla pliku 2: " + str(c))
-    # print("Ilość słów z pliku 1 znalezionych w pliku 2: " + str(j))
+    print("Ilość słów w pliku 1. (bez powtórzeń): " + str(len(words_1)))
+    print("Ilość słów w pliku 2. (bez powtórzeń): " + str(len(words_2)))
+    print("Ilość słów unikalne dla pliku 1: " + str(i))
+    print("Ilość słów unikalne dla pliku 2: " + str(c))
+    print("Ilość słów z pliku 1 znalezionych w pliku 2: " + str(j))
 
     save_results(words_1, len(words_2), i, c, j)
 
@@ -102,5 +111,5 @@ def save_results(words, n2, unique_1, unique_2, matches):
     file.close()
 
 
-results(bm(read_to_string("file2.txt"), read_to_dict("file1.txt")), read_to_dict("file2.txt"))
+results(bm(read_to_string("file1.txt"), read_to_dict("file2.txt")), read_to_dict("file1.txt"))
 os.system('start notepad results.txt')
