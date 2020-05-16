@@ -1,6 +1,10 @@
 # Wyznaczy listę słów, które pojawiają się w tekście z jednego pliku, a nie pojawiają się w tekście z pliku drugiego przy pomocy algorytmu Boyer-Moore
-def read_f1(path):
-    with open(path, 'r') as file:
+# -*- coding: utf-8 -*-
+import os
+
+
+def read_to_string(path):
+    with open(path, 'r', encoding="utf-8") as file:
         text = file.read()
     text = text.lower()
     # print(text)
@@ -8,47 +12,95 @@ def read_f1(path):
     return text
 
 
-def read_f2(path):
+def read_to_dict(path):
     words = {}
     symbols = ' .,!-?()"":\n '  # warunki dla - w środku ! - strip załatwia sprwawe
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding="utf-8") as file:
         for line in file:
             for word in line.split():
                 tmp = word.strip(symbols)
                 tmp = tmp.lower()
+                t = ' ' + tmp + ' '
                 # TYMCZASOWE ROZWIĄZANIE!
-                tmp = ' ' + tmp + ' '
-                if tmp not in words and tmp != "":
-                    words[tmp] = False
-    print("Number of words: " + str(len(words)))
-
-    # print(words.keys())
+                if t not in words and tmp != "":
+                    words[t] = False
+    # print("Ilość słów bez powtórzeń: " + str(len(words)))
+    #print(words.keys())
     file.close()
     return words
 
 
 def bm(text, words):
-    z=0
     n = len(text)
     for w in words:
         m = len(w)
-        i = m-1
-        j = m-1
+        i = m - 1
+        j = m - 1
         while True:
             if w[j] == text[i]:
                 if j == 0:
                     words[w] = True
-                    z += 1
-                    print("Match no. " + str(z) + " word: '" + w + "' on position: " + str(i))
+                    # print("Matched word: '" + w + "' on position: " + str(i))
                     break
                 else:
                     i -= 1
                     j -= 1
             else:
                 i = i + m - min(j, 1 + w.rfind(text[i]))
-                j = m-1
-            if i > n-1:
+                j = m - 1
+            if i > n - 1:
                 break
+    return words
 
 
-bm(read_f1("file1.txt"), read_f2("file2.txt"))
+def results(words_1, words_2):
+    i = 0
+    j = 0
+    for w in words_1:
+        if words_1[w]:
+            j += 1
+        elif not words_1[w]:
+            # print(w)
+            i += 1
+    c = int(len(words_2)) - j
+
+    # print("Ilość słów w pliku 1. (bez powtórzeń): " + str(len(words_1)))
+    # print("Ilość słów w pliku 2. (bez powtórzeń): " + str(len(words_2)))
+    # print("Ilość słów unikalne dla pliku 1: " + str(i))
+    # print("Ilość słów unikalne dla pliku 2: " + str(c))
+    # print("Ilość słów z pliku 1 znalezionych w pliku 2: " + str(j))
+
+    save_results(words_1, len(words_2), i, c, j)
+
+
+def save_results(words, n2, unique_1, unique_2, matches):
+    file = open("results.txt", "w")
+
+    file.write("Egzamin Praktyczny AiSD Konrad Lubera \n")
+    file.write("Temat: Wyznaczy listę słów, które pojawiają się w tekście z jednego pliku, a nie pojawiają się w tekście z pliku drugiego przy pomocy algorytmu Boyer-Moore\n")
+    file.write("---------------------------------------\n")
+
+    file.write("Wyniki: \n")
+    file.write("--------\n")
+    file.write("Ilość słów w pliku 1. (bez powtórzeń): " + str(len(words)) + "\n")
+    file.write("Ilość słów w pliku 2. (bez powtórzeń): " + str(n2) + "\n")
+    file.write("---------\n")
+    file.write("Słowa unikalne dla pliku 1: " + str(unique_1) + "\n")
+    file.write("Słowa unikalne dla pliku 2: " + str(unique_2) + "\n")
+    file.write("---------\n")
+    file.write("Ilość słów z pliku 1 znalezionych w pliku 2: " + str(matches) + "\n")
+    file.write("---------------------------------------\n")
+
+    file.write(
+        "Słowa które pojawiają się w tekście z jednego pliku, a nie pojawiają się w tekście z pliku drugiego: \n")
+    i = 1
+    for w in words:
+        if not words[w]:
+            file.write(str(i) + ". " + str(w.strip().capitalize()) + "\n")
+            i += 1
+
+    file.close()
+
+
+results(bm(read_to_string("file2.txt"), read_to_dict("file1.txt")), read_to_dict("file2.txt"))
+os.system('start notepad results.txt')

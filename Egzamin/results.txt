@@ -1,0 +1,99 @@
+Egzamin Praktyczny AiSD Konrad Lubera 
+Temat: Wyznaczy listê s³ów, które pojawiaj¹ siê w tekœcie z jednego pliku, a nie pojawiaj¹ siê w tekœcie z pliku drugiego przy pomocy algorytmu Boyer-Moore
+---------------------------------------
+Wyniki: 
+--------
+Iloœæ s³ów w pliku 1. (bez powtórzeñ): 94
+Iloœæ s³ów w pliku 2. (bez powtórzeñ): 82
+---------
+S³owa unikalne dla pliku 1: 85
+S³owa unikalne dla pliku 2: 73
+---------
+Iloœæ s³ów z pliku 1 znalezionych w pliku 2: 9
+---------------------------------------
+S³owa które pojawiaj¹ siê w tekœcie z jednego pliku, a nie pojawiaj¹ siê w tekœcie z pliku drugiego: 
+1. Moje
+2. Morza
+3. Tulipanów
+4. Chyl¹
+5. Czo³a
+6. Przed
+7. Wiatrem
+8. Mola
+9. Waszych
+10. Œwiatów
+11. Broni¹
+12. Etosu
+13. Barier
+14. Rozkielisza
+15. Uderzenie
+16. Ale
+17. Zbli¿am
+18. Dwójnasób
+19. Rozdziewiczam
+20. Powonienie
+21. Jedno
+22. Molo
+23. Jeden
+24. Kwiat
+25. Ja
+26. Wci¹¿
+27. Liczê
+28. Szanse
+29. I
+30. Choæ
+31. Ka¿¹
+32. Mi
+33. Uton¹æ
+34. ¯agle
+35. Mój
+36. Glider
+37. To
+38. M¹dre
+39. P³ozy
+40. Pozy
+41. Kosi
+42. Cent
+43. Ten
+44. Joint
+45. Zrobi³
+46. Z
+47. G³owy
+48. Dobry
+49. Pomys³
+50. Ro¿no
+51. Wolni
+52. Œciem
+53. Jeszcze
+54. Wtedy
+55. Rap
+56. Mówi³
+57. Nam
+58. Kurwa
+59. Dorosn¹æ
+60. Wasze
+61. Twardych
+62. Prawd
+63. Tak
+64. Szarzenie
+65. Zimne
+66. Mam
+67. Nich
+68. Zdrowia
+69. Czas
+70. Zabiera
+71. Ikrê
+72. Nad
+73. Nim
+74. Tylko
+75. Wiersz
+76. J¹
+77. Lot
+78. Dwie
+79. Kochanki
+80. Inna
+81. Trajektoria
+82. Wyku³em
+83. Sam
+84. Oplot³em
+85. Sob¹
