@@ -1,5 +1,5 @@
-# Wyznaczy listę słów, które pojawiają się w tekście z jednego pliku, a nie pojawiają się w tekście z pliku drugiego przy pomocy algorytmu Boyer-Moore
 # -*- coding: utf-8 -*-
+# Wyznaczy listę słów, które pojawiają się w tekście z jednego pliku, a nie pojawiają się w tekście z pliku drugiego przy pomocy algorytmu Boyer-Moore
 import os
 
 
@@ -20,11 +20,10 @@ def read_to_dict(path):
             for word in line.split():
                 tmp = word.strip(symbols)
                 tmp = tmp.lower()
-                #t = ' ' + tmp + ' '
-                t = tmp
                 # TYMCZASOWE ROZWIĄZANIE!
-                if t not in words and tmp != "":
-                    words[t] = False
+                #t = ' ' + tmp + ' '
+                if tmp not in words and tmp != "":
+                    words[tmp] = False
     # print("Ilość słów bez powtórzeń: " + str(len(words)))
     #print(words.keys())
     file.close()
@@ -50,6 +49,7 @@ def bm(text, words):
                         break
                     else:
                         i = i + m - min(j, 1 + w.rfind(text[i]))
+                        #i = i + m - min(j, 1 + w.rfind(text[i+len(w)]))
                         j = m - 1
                 else:
                     i -= 1
@@ -62,7 +62,21 @@ def bm(text, words):
     return words
 
 
-def results(words_1, words_2):
+def count_words(path):
+    words = []
+    symbols = ' .,!-?()"":\n '
+    with open(path, 'r', encoding="utf-8") as file:
+        for line in file:
+            for word in line.split():
+                tmp = word.strip(symbols)
+                tmp = tmp.lower()
+                if tmp not in words and tmp != "":
+                    words.append(tmp)
+    file.close()
+    return len(words)
+
+
+def results(words_1, num_of_word_2):
     i = 0
     j = 0
     for w in words_1:
@@ -71,15 +85,15 @@ def results(words_1, words_2):
         elif not words_1[w]:
             # print(w)
             i += 1
-    c = int(len(words_2)) - j
+    c = int(num_of_word_2) - j
 
     print("Ilość słów w pliku 1. (bez powtórzeń): " + str(len(words_1)))
-    print("Ilość słów w pliku 2. (bez powtórzeń): " + str(len(words_2)))
+    print("Ilość słów w pliku 2. (bez powtórzeń): " + str(num_of_word_2))
     print("Ilość słów unikalne dla pliku 1: " + str(i))
     print("Ilość słów unikalne dla pliku 2: " + str(c))
     print("Ilość słów z pliku 1 znalezionych w pliku 2: " + str(j))
 
-    save_results(words_1, len(words_2), i, c, j)
+    save_results(words_1, num_of_word_2, i, c, j)
 
 
 def save_results(words, n2, unique_1, unique_2, matches):
@@ -111,5 +125,5 @@ def save_results(words, n2, unique_1, unique_2, matches):
     file.close()
 
 
-results(bm(read_to_string("file1.txt"), read_to_dict("file2.txt")), read_to_dict("file1.txt"))
-os.system('start notepad results.txt')
+results(bm(read_to_string("file1.txt"), read_to_dict("file2.txt")), count_words("file1.txt"))
+#os.system('start notepad results.txt')
