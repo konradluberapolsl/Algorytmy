@@ -7,6 +7,7 @@ def read_to_string(path):
     with open(path, 'r', encoding="utf-8") as file:
         text = file.read()
     text = text.lower()
+    text += " " # dodatkowe zabezpieczenie
     #print(text)
     file.close()
     return text
@@ -73,6 +74,7 @@ def count_words(path):
                 if tmp not in words and tmp != "":
                     words.append(tmp)
     file.close()
+    print(words)
     return len(words)
 
 
@@ -126,4 +128,4 @@ def save_results(words, n2, unique_1, unique_2, matches):
 
 
 results(bm(read_to_string("file1.txt"), read_to_dict("file2.txt")), count_words("file1.txt"))
-#os.system('start notepad results.txt')
+os.system('start notepad results.txt')
