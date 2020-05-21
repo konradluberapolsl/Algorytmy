@@ -74,7 +74,7 @@ def count_words(path):
                 if tmp not in words and tmp != "":
                     words.append(tmp)
     file.close()
-    print(words)
+    #print(words)
     return len(words)
 
 
@@ -89,11 +89,11 @@ def results(words_1, num_of_word_2):
             i += 1
     c = int(num_of_word_2) - j
 
-    print("Ilość słów w pliku 1. (bez powtórzeń): " + str(len(words_1)))
-    print("Ilość słów w pliku 2. (bez powtórzeń): " + str(num_of_word_2))
-    print("Ilość słów unikalne dla pliku 1: " + str(i))
-    print("Ilość słów unikalne dla pliku 2: " + str(c))
-    print("Ilość słów z pliku 1 znalezionych w pliku 2: " + str(j))
+    # print("Ilość słów w pliku 1. (bez powtórzeń): " + str(len(words_1)))
+    # print("Ilość słów w pliku 2. (bez powtórzeń): " + str(num_of_word_2))
+    # print("Ilość słów unikalne dla pliku 1: " + str(i))
+    # print("Ilość słów unikalne dla pliku 2: " + str(c))
+    # print("Ilość słów z pliku 1 znalezionych w pliku 2: " + str(j))
 
     save_results(words_1, num_of_word_2, i, c, j)
 
